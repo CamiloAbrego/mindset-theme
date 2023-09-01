@@ -50,8 +50,20 @@ function fwd_setup() {
 	register_nav_menus(
 		array(
 			'header' => esc_html__( 'Header Menu Location', 'fwd' ),
+			'footer-left' => esc_html__( 'Footer - Left Side', 'fwd' ),
 		)
 	);
+
+
+	
+register_nav_menus( 
+    array(
+        'header' => esc_html__( 'Header Menu Location', 'fwd' ),
+        'footer-right' => esc_html__( 'Footer - right Side', 'fwd' ),
+    )
+);
+
+
 
 	/*
 		* Switch default core markup for search form, comment form, and comments
