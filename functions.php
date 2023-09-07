@@ -160,6 +160,21 @@ function fwd_widgets_init() {
 }
 add_action( 'widgets_init', 'fwd_widgets_init' );
 
+function fwd_register_second_sidebar() {
+    register_sidebar(
+        array(
+            'name'          => esc_html__( 'Second Sidebar', 'fwd' ),
+            'id'            => 'second-sidebar',
+            'description'   => esc_html__( 'Add widgets here for the second sidebar.', 'fwd' ),
+            'before_widget' => '<section id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</section>',
+            'before_title'  => '<h2 class="widget-title">',
+            'after_title'   => '</h2>',
+        )
+    );
+}
+add_action( 'widgets_init', 'fwd_register_second_sidebar' );
+
 /**
  * Enqueue scripts and styles.
  */
@@ -174,6 +189,8 @@ function fwd_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fwd_scripts' );
+
+/*
 
 /**
  * Custom template tags for this theme.
@@ -196,3 +213,55 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+?>
+
+					<?php
+					    add_theme_support( 'post-thumbnails' );
+					?>
+
+					<?php 
+					add_image_size( 'portrait-blog', 200, 250, true );
+					?>
+
+
+					<?php
+					// Check if a featured image was added
+					if ( has_post_thumbnail() ) {
+					    // Request a crop size and define any attributes
+					    the_post_thumbnail( $size, $attr );
+					}
+					?>
+					
+
+					<?php
+					// Example
+					if ( has_post_thumbnail() ) {
+					    the_post_thumbnail( 'blog-small', array( 'class' => 'alignleft' ) );
+					}
+					?>
+					
+					<?php
+					// Portrait Blog Size - 200px width, 250px height, hard crop
+					add_image_size( 'portrait-blog', 200, 250, true );
+					?>
+
+					
+					<?php
+					// Check if a featured image was added
+					if ( has_post_thumbnail() ) {
+					    // Request a crop size and define any attributes
+					    the_post_thumbnail( $size, $attr );
+					}
+					?>
+					
+					 <?php if ( function_exists( 'add_image_size' ) ) {
+    		add_image_size( 'custom-crop-size', 400, 200, true ); // Width, Height, Hard Crop
+			}		?>
+
+					<?php
+					// Example
+					if ( has_post_thumbnail() ) {
+					    the_post_thumbnail( 'blog-small', array( 'class' => 'alignleft' ) );
+					}
+					?>
