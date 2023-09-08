@@ -264,4 +264,92 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 					if ( has_post_thumbnail() ) {
 					    the_post_thumbnail( 'blog-small', array( 'class' => 'alignleft' ) );
 					}
+
+
+
+
+
 					?>
+					
+					<?php
+					//add theme color meta
+
+			function fwd_theme_color() {
+    			echo '<meta name="theme-color" content="#fff200">';
+			}
+				add_action( 'wp_head', 'fwd_theme_color' );
+
+
+			//change the exerpt llength to 55 to 20 
+			function fwd_excerpt_length($length){
+				return 20;
+
+			}
+			add_filter('excerpt_length', 'fwd_excerpt_length', 999);
+				?>
+
+				<?php
+				//moddified the end of the exerpt 
+					function fwd_excerpt_more( $more ) {
+   				 $more = '... <a class="read-more" href="' . esc_url( get_permalink() ) . '">Continue Reading</a>';
+    		return $more;
+			}
+		add_filter( 'excerpt_more', 'fwd_excerpt_more' );
+
+		
+			function fwd_block_editor_templates() {
+    // Replace '14' with the Page ID
+    if ( isset( $_GET['post'] ) && '72' == $_GET['post'] ) {
+        $post_type_object = get_post_type_object( 'page' );
+        $post_type_object->template = array(
+            // define blocks here...
+			array( 
+   			 'core/paragraph', 
+   			 array( 
+       		 'placeholder' => 'Add your introduction here...'
+    		) 
+		),
+		array( 
+    	'core/heading', 
+   		 array( 
+        'placeholder' => 'Add your heading here...',
+        'level' => 2
+   	 ) 
+	),
+	array( 
+    'core/image', 
+    array( 
+        'align' => 'left', 
+        'sizeSlug' => 'medium' 
+    )
+),
+array( 
+    'core/paragraph', 
+    array( 
+        'placeholder' => 'Add text here...'
+    ) 
+),
+        );
+		  $post_type_object->template_lock = 'all';
+    }
+}
+add_action( 'init', 'fwd_block_editor_templates' );
+
+
+//changed the block editor to classic 
+
+function fwd_post_filter( $use_block_editor, $post ) {
+    // Change 112 to your Page ID
+    $page_ids = array( 92 );
+    if ( in_array( $post->ID, $page_ids ) ) {
+        return false;
+    } else {
+        return $use_block_editor;
+    }
+}
+add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );
+
+
+
+
+		

@@ -19,10 +19,54 @@ get_header();
 			get_template_part( 'template-parts/content', 'page' );
 			?>
 
-			<section class="home-intro"></section>
+			<section class="home-intro">
+                <?php
+        if ( function_exists( 'get_field' ) ) {
+             if ( get_field( 'top_section_' ) ) {
+        the_field( 'top_section_' );
+          }
+            }
+                ?>
+            </section>
 			<section class="home-work"></section>
-			<section class="home-left"></section>
-			<section class="home-right"></section>
+			<section class="home-left">
+                <?php
+if ( function_exists( 'get_field' ) ) {
+
+    if ( get_field( 'left_section_heading' ) ) {
+        echo '<h2>';
+        the_field( 'left_section_heading' );
+        echo '</h2>';
+    }
+
+    if ( get_field( 'left_section_content' ) ) {
+        echo '<p>';
+        the_field( 'left_section_content' );
+        echo '</p>';
+    }
+
+}
+?>
+            </section>
+			<section class="home-right">
+                               <?php
+if ( function_exists( 'get_field' ) ) {
+
+    if ( get_field( 'right_section_heading' ) ) {
+        echo '<h2>';
+        the_field( 'right_section_heading' );
+        echo '</h2>';
+    }
+
+    if ( get_field( 'right_section_content' ) ) {
+        echo '<p>';
+        the_field( 'right_section_content' );
+        echo '</p>';
+    }
+
+}
+?>
+            </section>
 			<section class="home-slider"></section>
 			<section class="home-blog"></section>
 				<h2><?php  esc_html_e('Latest Blog Post', 'fwd' ); ?></h2>
@@ -52,6 +96,7 @@ if ( $recent_posts->have_posts() ) :
     endwhile;
     wp_reset_postdata(); // Reset post data.
 endif;
+
 ?>
 
 
