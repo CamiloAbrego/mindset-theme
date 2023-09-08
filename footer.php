@@ -30,6 +30,26 @@
 			<?php esc_html_e( 'Created by ', 'fwd' ); ?><a href="<?php echo esc_url( __( 'https://wp.bcitwebdeveloper.ca/', 'fwd' ) ); ?>"><?php esc_html_e( 'Jonathon Leathers', 'fwd' ); ?></a>
 		</div><!-- .site-info -->
 	
+		<?php
+if ( function_exists( 'get_field' ) ) {
+    if ( ! is_page('contact') ) {
+        if ( get_field('address', 7) ) {
+            echo '<div class="footer-contact-left">';
+                the_field('address', 7);
+            echo '</div>';
+        }
+        if ( get_field('email', 7) ) {
+            $email  = get_field( 'email', 7 );
+            $mailto = 'mailto:' . $email;
+            ?>
+            <div class="footer-contact-right">
+                <p><a href="<?php echo esc_url( $mailto ); ?> "><?php echo esc_html( $email ); ?></a></p>
+            </div>
+            <?php
+        }
+    }
+}
+?>
  
 	</footer><!-- #colophon -->
 </div>

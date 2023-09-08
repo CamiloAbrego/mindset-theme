@@ -45,23 +45,31 @@ function fwd_setup() {
 		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		*/
 	add_theme_support( 'post-thumbnails' );
+	
+					
+					add_image_size( 'portrait-blog', 200, 250, true );
+					
+
+
+				
+					
+					
+					// Portrait Blog Size - 200px width, 250px height, hard crop
+					add_image_size( 'portrait-blog', 200, 250, true );
+					
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
 			'header' => esc_html__( 'Header Menu Location', 'fwd' ),
 			'footer-left' => esc_html__( 'Footer - Left Side', 'fwd' ),
+			'footer-right' => esc_html__( 'Footer - right Side', 'fwd' ),
 		)
 	);
 
 
 	
-register_nav_menus( 
-    array(
-        'header' => esc_html__( 'Header Menu Location', 'fwd' ),
-        'footer-right' => esc_html__( 'Footer - right Side', 'fwd' ),
-    )
-);
+
 
 
 
@@ -207,6 +215,9 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
+
+require get_template_directory() . '/inc/cpt-taxonomy.php';
+
 /**
  * Load Jetpack compatibility file.
  */
@@ -214,64 +225,14 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-?>
-
-					<?php
-					    add_theme_support( 'post-thumbnails' );
-					?>
-
-					<?php 
-					add_image_size( 'portrait-blog', 200, 250, true );
-					?>
 
 
-					<?php
-					// Check if a featured image was added
-					if ( has_post_thumbnail() ) {
-					    // Request a crop size and define any attributes
-					    the_post_thumbnail( $size, $attr );
-					}
-					?>
-					
-
-					<?php
-					// Example
-					if ( has_post_thumbnail() ) {
-					    the_post_thumbnail( 'blog-small', array( 'class' => 'alignleft' ) );
-					}
-					?>
-					
-					<?php
-					// Portrait Blog Size - 200px width, 250px height, hard crop
-					add_image_size( 'portrait-blog', 200, 250, true );
-					?>
 
 					
-					<?php
-					// Check if a featured image was added
-					if ( has_post_thumbnail() ) {
-					    // Request a crop size and define any attributes
-					    the_post_thumbnail( $size, $attr );
-					}
-					?>
 					
-					 <?php if ( function_exists( 'add_image_size' ) ) {
-    		add_image_size( 'custom-crop-size', 400, 200, true ); // Width, Height, Hard Crop
-			}		?>
-
-					<?php
-					// Example
-					if ( has_post_thumbnail() ) {
-					    the_post_thumbnail( 'blog-small', array( 'class' => 'alignleft' ) );
-					}
-
-
-
-
-
-					?>
+			
+			
 					
-					<?php
 					//add theme color meta
 
 			function fwd_theme_color() {
@@ -286,9 +247,9 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 			}
 			add_filter('excerpt_length', 'fwd_excerpt_length', 999);
-				?>
+				
 
-				<?php
+				
 				//moddified the end of the exerpt 
 					function fwd_excerpt_more( $more ) {
    				 $more = '... <a class="read-more" href="' . esc_url( get_permalink() ) . '">Continue Reading</a>';
@@ -339,8 +300,7 @@ add_action( 'init', 'fwd_block_editor_templates' );
 //changed the block editor to classic 
 
 function fwd_post_filter( $use_block_editor, $post ) {
-    // Change 112 to your Page ID
-    $page_ids = array( 92 );
+    $page_ids = array( 143, 11 );
     if ( in_array( $post->ID, $page_ids ) ) {
         return false;
     } else {
@@ -348,6 +308,7 @@ function fwd_post_filter( $use_block_editor, $post ) {
     }
 }
 add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );
+
 
 
 
