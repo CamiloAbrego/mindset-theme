@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying all pages
+ * Template Name: About Page
  *
  * This is the template that displays all pages by default.
  * Please note that this is the WordPress construct of pages
@@ -30,6 +30,22 @@ get_header();
 
 		endwhile; // End of the loop.
 		?>
+	<?php 
+$args = array(
+    'post_type'      => 'fwd-testimonial',
+    'posts_per_page' => -1
+);
+
+$query = new WP_Query( $args );
+
+if ( $query -> have_posts() ){
+    while ( $query -> have_posts() ) {
+        $query -> the_post();
+        the_content();
+    }
+    wp_reset_postdata();
+} 
+?>
 
 	</main><!-- #primary -->
 

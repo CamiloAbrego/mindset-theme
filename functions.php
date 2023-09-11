@@ -312,5 +312,15 @@ add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );
 
 
 
+//flushing theme
+function fwd_rewrite_flush() {
+    fwd_register_custom_post_types();
+    flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'fwd_rewrite_flush' );
+
+
+
+
 
 		

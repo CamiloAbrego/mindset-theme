@@ -164,29 +164,4 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	}
 endif;
 ?>
-<?php if ( is_singular() ) : ?>
-			
-					    <div class="post-thumbnail">
-					        <?php the_post_thumbnail( 'large' ); ?>
-					    </div>
-			
-					<?php else : ?>
-			
-					    <a class="post-thumbnail alignleft" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-					        <?php
-					            the_post_thumbnail(
-					                'portrait-blog',
-					                    array(
-					                        'alt' => the_title_attribute(
-					                        array(
-					                            'echo' => false,
-					                        )
-					                    ),
-					                )
-					            );
-					        ?>
-					    </a>
-			
-					<?php endif; // End is_singular(). ?>
-
 						 
