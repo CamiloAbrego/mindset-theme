@@ -14,24 +14,76 @@
 
 get_header();
 ?>
+<main id="primary" class="site-main">
 
-	<main id="primary" class="site-main">
+    <?php while ( have_posts() ) : the_post(); ?>
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-			get_template_part( 'template-parts/content', 'page' );
+            <header class="entry-header">
+                <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+            </header>
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+            <div class="entry-content">
+                <?php the_content(); ?>
 
-		endwhile; // End of the loop.
-		?>
+                <?php // Add WP_Query() code here... ?>
+            </div>
 
-	</main><!-- #primary -->
+        </article>
+
+    <?php endwhile; ?>
+
+	
+<?php
+$args = array(
+    'post_type'      => 'fwd-service',
+    'posts_per_page' => -1,
+    'order'          => 'ASC',
+    'orderby'        => 'title'
+);
+ 
+$query = new WP_Query( $args );
+ 
+if ( $query -> have_posts() ) {
+    while ( $query -> have_posts() ) {
+        $query -> the_post();
+ 
+        echo '<a href="#163'. esc_attr( get_the_ID() ) .'">'. esc_html( get_the_title() ) .'</a>';
+ 
+    }
+    wp_reset_postdata();
+}
+?>
+
+<?php
+$args = array(
+    'post_type'      => 'fwd-service',
+    'posts_per_page' => -1,
+    'order'          => 'ASC',
+    'orderby'        => 'title'
+);
+ 
+$query = new WP_Query( $args );
+ 
+if ( $query -> have_posts() ){
+    while ( $query -> have_posts() ) {
+        $query -> the_post();
+ 
+        if ( function_exists( 'get_field' ) ) {
+            if ( get_field( 'service_text' ) ) {
+                echo '<h2>'. esc_html( get_the_title() ) .'</h2>';
+                the_field( 'service_text' );
+            }
+        }
+ 
+    }
+    wp_reset_postdata();
+}
+?>
+
+
+</main><!-- #primary -->
 
 <?php
 get_sidebar();

@@ -92,3 +92,72 @@ register_post_type( 'fwd-testimonial', $args );
 
 }
 add_action( 'init', 'fwd_register_custom_post_types' );
+
+
+	
+$labels = array(
+    'name'               => _x( 'Services', 'post type general name' ),
+    'singular_name'      => _x( 'Service', 'post type singular name' ),
+    'menu_name'          => _x( 'Services', 'admin menu' ),
+    'name_admin_bar'     => _x( 'Service', 'add new on admin bar' ),
+    'add_new'            => _x( 'Add New', 'service'  ),
+    'add_new_item'       => __( 'Add New Service'  ),
+    'new_item'           => __( 'New Service' ),
+    'edit_item'          => __( 'Edit Service' ),
+    'view_item'          => __( 'View Service' ),
+    'all_items'          => __( 'All Services'  ),
+    'search_items'       => __( 'Search Services' ),
+    'parent_item_colon'  => __( 'Parent Services:' ),
+    'not_found'          => __( 'No services found.' ),
+    'not_found_in_trash' => __( 'No services found in Trash.' ),
+);
+ 
+$args = array(
+    'labels'             => $labels,
+    'public'             => true,
+    'publicly_queryable' => true,
+    'show_ui'            => true,
+    'show_in_menu'       => true,
+    'show_in_rest'       => true,
+    'query_var'          => true,
+    'rewrite'            => array( 'slug' => 'services'),
+    'capability_type'    => 'post',
+    'has_archive'        => false,
+    'hierarchical'       => false,
+    'menu_position'      => 6,
+    'menu_icon'          => 'dashicons-forms',
+    'supports'           => array( 'title' )
+);
+ 
+register_post_type( 'fwd-service', $args );
+
+function fwd_register_taxonomies() {
+    // Add Work Category taxonomy
+    $labels = array(
+        'name'              => _x( 'Work Categories', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Work Category', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Work Categories' ),
+        'all_items'         => __( 'All Work Category' ),
+        'parent_item'       => __( 'Parent Work Category' ),
+        'parent_item_colon' => __( 'Parent Work Category:' ),
+        'edit_item'         => __( 'Edit Work Category' ),
+        'view_item'         => __( 'Vview Work Category' ),
+        'update_item'       => __( 'Update Work Category' ),
+        'add_new_item'      => __( 'Add New Work Category' ),
+        'new_item_name'     => __( 'New Work Category Name' ),
+        'menu_name'         => __( 'Work Category' ),
+    );
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_in_menu'      => true,
+        'show_in_nav_menu'  => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'work-categories' ),
+    );
+    register_taxonomy( 'fwd-work-category', array( 'fwd-work' ), $args );
+}
+add_action( 'init', 'fwd_register_taxonomies');
