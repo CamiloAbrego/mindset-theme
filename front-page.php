@@ -38,6 +38,21 @@ get_header();
 if ( $query->have_posts() ) {
     ?>
     		<section class="home-work">
+                	
+<?php
+// Add the 'tax_query' parameter to your existing $args...
+$args = array(
+    'post_type'      => 'fwd-work',
+    'posts_per_page' => 4,
+    'tax_query'      => array(
+        array(
+            'taxonomy' => 'fwd-featured',
+            'field'    => 'slug',
+            'terms'    => 'front-page'
+        ),
+    ),
+);
+?>
                 <h2>feature work</h2>
                 <?php
     while( $query->have_posts() ) {
