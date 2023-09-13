@@ -186,3 +186,4 @@ function fwd_register_taxonomies() {
     register_taxonomy( 'fwd-work-category', array( 'fwd-work' ), $args );
 }
 add_action( 'init', 'fwd_register_taxonomies');
+

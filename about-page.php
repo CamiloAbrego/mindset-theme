@@ -46,6 +46,7 @@ if ( $query -> have_posts() ){
     wp_reset_postdata();
 } 
 ?>
+<?php get_template_part( 'template-parts/work', 'categories' ); ?>
 
 	</main><!-- #primary -->
 

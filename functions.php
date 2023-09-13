@@ -195,8 +195,18 @@ function fwd_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
+wp_enqueue_style( 
+    'fwd-googlefonts', 
+    'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap',
+    array(),
+    null // Set null if loading multiple Google Fonts from their CDN
+);
+
+	
 }
 add_action( 'wp_enqueue_scripts', 'fwd_scripts' );
+
 
 /*
 

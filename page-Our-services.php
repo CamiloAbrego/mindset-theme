@@ -46,45 +46,75 @@ $args = array(
 $query = new WP_Query( $args );
  
 if ( $query -> have_posts() ) {
+
     while ( $query -> have_posts() ) {
         $query -> the_post();
- 
-        echo '<a href="#163'. esc_attr( get_the_ID() ) .'">'. esc_html( get_the_title() ) .'</a>';
- 
+        echo '<a href="#'. esc_attr( get_the_ID() ) .'">'. esc_html( get_the_title() ) .'</a>';
     }
     wp_reset_postdata();
 }
 ?>
 
 <?php
-$args = array(
-    'post_type'      => 'fwd-service',
-    'posts_per_page' => -1,
-    'order'          => 'ASC',
-    'orderby'        => 'title'
+$taxonomy = 'fwd-service-type';
+$terms    = get_terms(
+    array(
+        'taxonomy' => $taxonomy
+    )
 );
- 
-$query = new WP_Query( $args );
- 
-if ( $query -> have_posts() ){
-    while ( $query -> have_posts() ) {
-        $query -> the_post();
- 
-        if ( function_exists( 'get_field' ) ) {
-            if ( get_field( 'service_text' ) ) {
-                echo '<h2>'. esc_html( get_the_title() ) .'</h2>';
-                the_field( 'service_text' );
+if($terms && ! is_wp_error($terms) ){
+    foreach($terms as $term){
+        $args = array(
+            'post_type'      => 'fwd-service',
+            'posts_per_page' => -1,
+            'order'          => 'ASC',
+            'orderby'        => 'title',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'slug',
+                    'terms'    => $term->slug,
+                )
+            ),
+        );
+         
+        $query = new WP_Query( $args );
+         
+        if ( $query -> have_posts() ) {
+            // Output Term name.
+            echo '<h2>' . esc_html( $term->name ) . '</h2>';
+         
+            // Output Navigation.
+            // while ( $query -> have_posts() ) {
+            //     $query -> the_post();
+            //     echo '<a href="#'. esc_attr( get_the_ID() ) .'">'. esc_html( get_the_title() ) .'</a>';
+            // }
+            // wp_reset_postdata();
+         
+            // Output Content.
+          
+            while ( $query -> have_posts() ) {
+                $query -> the_post();
+         
+                if ( function_exists( 'get_field' ) ) {
+                    if ( get_field( 'service_text' ) ) {
+                        echo '<h3 id="'. esc_attr( get_the_ID() ) .'">'. esc_html( get_the_title() ) .'</h3>';
+                        the_field( 'service_text' );
+                    }
+                }
+         
             }
+            wp_reset_postdata();
         }
- 
     }
-    wp_reset_postdata();
 }
+  // added in johns code need to fix my services code 
 ?>
+
 
 
 </main><!-- #primary -->
 
-<?php
+<?php 
 get_sidebar();
 get_footer();
