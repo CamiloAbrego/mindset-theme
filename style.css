@@ -974,6 +974,11 @@ svg path {
 	grid-gap: 2em;
 }
 
+/*ABout the page*/
+.page-id-154 blockquote {
+    border-left: none;
+    padding-left: 0;
+}
 /* Footer
 --------------------------------------------- */
 .site-footer {

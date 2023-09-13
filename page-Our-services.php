@@ -27,36 +27,8 @@ get_header();
             <div class="entry-content">
                 <?php the_content(); ?>
 
-                <?php // Add WP_Query() code here... ?>
-            </div>
-
-        </article>
-
-    <?php endwhile; ?>
-
-	
-<?php
-$args = array(
-    'post_type'      => 'fwd-service',
-    'posts_per_page' => -1,
-    'order'          => 'ASC',
-    'orderby'        => 'title'
-);
- 
-$query = new WP_Query( $args );
- 
-if ( $query -> have_posts() ) {
-
-    while ( $query -> have_posts() ) {
-        $query -> the_post();
-        echo '<a href="#'. esc_attr( get_the_ID() ) .'">'. esc_html( get_the_title() ) .'</a>';
-    }
-    wp_reset_postdata();
-}
-?>
-
-<?php
-$taxonomy = 'fwd-service-type';
+               <?php
+$taxonomy = 'fwd-service-category';
 $terms    = get_terms(
     array(
         'taxonomy' => $taxonomy
@@ -92,7 +64,6 @@ if($terms && ! is_wp_error($terms) ){
             // wp_reset_postdata();
          
             // Output Content.
-          
             while ( $query -> have_posts() ) {
                 $query -> the_post();
          
@@ -108,8 +79,15 @@ if($terms && ! is_wp_error($terms) ){
         }
     }
 }
-  // added in johns code need to fix my services code 
 ?>
+                
+            </div>
+
+        </article>
+
+    <?php endwhile; ?>
+
+
 
 
 

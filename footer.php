@@ -24,7 +24,7 @@
 </nav>
 		</div><!-- .footer-menus -->
 		<div class="site-info">
-			   <?php 
+			   <?php         get_template_part( 'images/location' );
 					the_privacy_policy_link();
 					?>
 			<?php esc_html_e( 'Created by ', 'fwd' ); ?><a href="<?php echo esc_url( __( 'https://wp.bcitwebdeveloper.ca/', 'fwd' ) ); ?>"><?php esc_html_e( 'Jonathon Leathers', 'fwd' ); ?></a>
@@ -35,6 +35,7 @@ if ( function_exists( 'get_field' ) ) {
     if ( ! is_page('contact') ) {
         if ( get_field('address', 7) ) {
             echo '<div class="footer-contact-left">';
+       
                 the_field('address', 7);
             echo '</div>';
         }

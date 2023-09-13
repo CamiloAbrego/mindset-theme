@@ -203,7 +203,12 @@ wp_enqueue_style(
     null // Set null if loading multiple Google Fonts from their CDN
 );
 
-	
+		// Enqueue Swiper on the Homepage
+if ( is_front_page() ) {
+    wp_enqueue_style( 'swiper-styles', get_template_directory_uri() .'/css/swiper-bundle.css', array(), '10.2.0' );
+    wp_enqueue_script( 'swiper-scripts', get_template_directory_uri() .'/js/swiper-bundle.min.js', array(), '10.2.0', array( 'strategy' => 'defer' )  );
+    wp_enqueue_script( 'swiper-settings', get_template_directory_uri() .'/js/swiper-settings.js', array( 'swiper-scripts' ), _S_VERSION, array( 'strategy' => 'defer' )  );
+}
 }
 add_action( 'wp_enqueue_scripts', 'fwd_scripts' );
 
@@ -332,4 +337,3 @@ add_action( 'after_switch_theme', 'fwd_rewrite_flush' );
 
 
 
-		
