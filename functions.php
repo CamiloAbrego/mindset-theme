@@ -198,7 +198,7 @@ function fwd_scripts() {
 
 wp_enqueue_style( 
     'fwd-googlefonts', 
-    'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap',
+    'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Dosis:wght@400;500&display=swap',
     array(),
     null // Set null if loading multiple Google Fonts from their CDN
 );

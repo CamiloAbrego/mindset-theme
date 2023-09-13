@@ -406,7 +406,7 @@ select,
 optgroup,
 textarea {
 	color: #404040;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans', 'Dosis', sans-serif;
 	font-size: 1rem;
 	line-height: 1.5;
 }
@@ -417,6 +417,7 @@ h3,
 h4,
 h5,
 h6 {
+	font-family: 'Dosis';
 	clear: both;
 	margin: 0.75em 0 0.25em;
 }
@@ -976,8 +977,8 @@ svg path {
 
 /*ABout the page*/
 .page-id-154 blockquote {
-    border-left: none;
-    padding-left: 0;
+	border-left: none;
+	padding-left: 0;
 }
 /* Footer
 --------------------------------------------- */
